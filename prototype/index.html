@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Smart Spending single-page product mockup"
+    />
+    <title>Smart Spending — Dashboard Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="prototype-banner">
+      Interactive HTML mockup · Sample data only
+    </div>
+
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="Smart Spending home">
+        <span class="brand-mark" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+        <span>Smart Spending</span>
+      </a>
+
+      <div class="header-actions">
+        <span class="local-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          Local AI ready
+        </span>
+        <button class="button button-secondary" type="button" id="exportButton">
+          Export
+        </button>
+        <button class="button button-primary" type="button" id="uploadButton">
+          <span aria-hidden="true">＋</span>
+          Add statement
+        </button>
+        <button class="avatar" type="button" aria-label="Open profile menu">M</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="workspace" aria-label="Spending analytics">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow">Overview</p>
+            <h1>Your spending, clearly explained.</h1>
+            <p class="heading-copy">
+              All accounts are automatically categorized and ready to explore.
+            </p>
+          </div>
+          <div class="review-badge" role="status">
+            <span class="review-icon" aria-hidden="true">!</span>
+            <span><strong>3</strong> low-confidence transactions</span>
+            <button type="button" id="reviewButton">Review</button>
+          </div>
+        </div>
+
+        <section class="filters" aria-label="Dashboard filters">
+          <label class="filter-field">
+            <span>Date range</span>
+            <select id="dateFilter">
+              <option value="july">July 2026</option>
+              <option value="june">June 2026</option>
+              <option value="all">All available</option>
+            </select>
+          </label>
+
+          <label class="filter-field">
+            <span>Account</span>
+            <select id="accountFilter">
+              <option value="all">All accounts</option>
+              <option value="Chase Checking">Chase Checking</option>
+              <option value="Amex Blue Cash">Amex Blue Cash</option>
+              <option value="Capital One">Capital One</option>
+            </select>
+          </label>
+
+          <label class="filter-field">
+            <span>Category</span>
+            <select id="categoryFilter">
+              <option value="all">All categories</option>
+              <option value="Dining">Dining</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Transport">Transport</option>
+              <option value="Bills">Bills</option>
+              <option value="Entertainment">Entertainment</option>
+            </select>
+          </label>
+
+          <label class="filter-field search-field">
+            <span>Search transactions</span>
+            <span class="search-input-wrap">
+              <span aria-hidden="true">⌕</span>
+              <input
+                id="searchFilter"
+                type="search"
+                placeholder="Merchant or description"
+                autocomplete="off"
+              />
+            </span>
+          </label>
+
+          <button class="reset-button" type="button" id="resetFilters">
+            Reset
+          </button>
+        </section>
+
+        <section class="metrics-grid" aria-label="Spending summary">
+          <article class="metric-card">
+            <div class="metric-label">
+              <span class="metric-icon wallet-icon" aria-hidden="true">▰</span>
+              Total spending
+            </div>
+            <strong class="metric-value" id="totalSpending">$4,280</strong>
+            <span class="metric-trend good" id="spendingTrend">↓ 8% vs. June</span>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-label">
+              <span class="metric-icon income-icon" aria-hidden="true">↗</span>
+              Income
+            </div>
+            <strong class="metric-value" id="totalIncome">$7,850</strong>
+            <span class="metric-trend good">↑ 5% vs. June</span>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-label">
+              <span class="metric-icon saved-icon" aria-hidden="true">◆</span>
+              Saved
+            </div>
+            <strong class="metric-value" id="totalSaved">$3,570</strong>
+            <span class="metric-trend good" id="savingsRate">45% savings rate</span>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-label">
+              <span class="metric-icon recurring-icon" aria-hidden="true">↻</span>
+              Recurring
+            </div>
+            <strong class="metric-value" id="totalRecurring">$286</strong>
+            <span class="metric-trend neutral">9 active subscriptions</span>
+          </article>
+        </section>
+
+        <section class="analytics-grid">
+          <article class="panel trend-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker">Spending trend</p>
+                <h2>Daily spending</h2>
+              </div>
+              <div class="legend">
+                <span><i class="legend-dot current"></i>July</span>
+                <span><i class="legend-dot previous"></i>June</span>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas
+                id="trendChart"
+                role="img"
+                aria-label="Cumulative spending trend for July compared with June"
+              ></canvas>
+            </div>
+          </article>
+
+          <article class="panel category-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker">Breakdown</p>
+                <h2>Spending by category</h2>
+              </div>
+              <button class="icon-button" type="button" aria-label="Category options">
+                ···
+              </button>
+            </div>
+            <div class="category-content">
+              <div class="donut" id="categoryDonut" aria-hidden="true">
+                <div class="donut-center">
+                  <strong id="donutTotal">$4,280</strong>
+                  <span>Total</span>
+                </div>
+              </div>
+              <div class="category-list" id="categoryList"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="insights" aria-labelledby="insightsTitle">
+          <div class="section-title-row">
+            <div>
+              <p class="panel-kicker">Automatic analysis</p>
+              <h2 id="insightsTitle">What changed this month</h2>
+            </div>
+            <span class="analysis-pill">Updated just now</span>
+          </div>
+
+          <div class="insight-grid">
+            <article class="insight-card positive">
+              <span class="insight-symbol" aria-hidden="true">↘</span>
+              <div>
+                <h3>Dining is down 18%</h3>
+                <p>You spent $246 less than last month, mostly from fewer delivery orders.</p>
+              </div>
+            </article>
+            <article class="insight-card warning">
+              <span class="insight-symbol" aria-hidden="true">↗</span>
+              <div>
+                <h3>Shopping is up $184</h3>
+                <p>Amazon and Target account for 72% of the increase.</p>
+              </div>
+            </article>
+            <article class="insight-card neutral">
+              <span class="insight-symbol" aria-hidden="true">↻</span>
+              <div>
+                <h3>Two subscriptions overlap</h3>
+                <p>You paid for both Spotify and Apple Music this month.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel transactions-panel">
+          <div class="panel-heading transaction-heading">
+            <div>
+              <p class="panel-kicker">Activity</p>
+              <h2>Transactions</h2>
+            </div>
+            <span class="result-count" id="resultCount">12 transactions</span>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Merchant</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Account</th>
+                  <th scope="col">Confidence</th>
+                  <th scope="col" class="amount-column">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="transactionRows"></tbody>
+            </table>
+            <div class="empty-state" id="emptyState" hidden>
+              <strong>No transactions match these filters.</strong>
+              <span>Try a different date, account, category, or search.</span>
+            </div>
+          </div>
+
+          <div class="table-footer">
+            <span id="tableSummary">Showing 12 of 12 transactions</span>
+            <div class="pagination" aria-label="Pagination">
+              <button type="button" disabled aria-label="Previous page">‹</button>
+              <button type="button" class="active" aria-current="page">1</button>
+              <button type="button" disabled aria-label="Next page">›</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <aside class="assistant-panel" aria-label="Spending Assistant">
+        <div class="assistant-heading">
+          <div class="assistant-avatar" aria-hidden="true">✦</div>
+          <div>
+            <h2>Spending Assistant</h2>
+            <span><i></i> Ready to help</span>
+          </div>
+          <button class="icon-button" type="button" id="clearChat" aria-label="Clear conversation">
+            ↻
+          </button>
+        </div>
+
+        <div class="assistant-context">
+          <span>Using your current dashboard filters</span>
+          <button type="button" id="contextButton">July · All accounts</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <div class="message assistant-message">
+            <div class="message-author">Spending Assistant</div>
+            <p>
+              Your spending is 8% lower than June. Dining improved the most, while
+              shopping increased. What would you like to understand?
+            </p>
+          </div>
+        </div>
+
+        <div class="suggested-prompts" aria-label="Suggested questions">
+          <button type="button">How can I save $300 next month?</button>
+          <button type="button">What subscriptions can I cancel?</button>
+          <button type="button">Why did shopping increase?</button>
+        </div>
+
+        <form class="chat-form" id="chatForm">
+          <label class="sr-only" for="chatInput">Ask about your spending</label>
+          <textarea
+            id="chatInput"
+            rows="2"
+            placeholder="Ask about your spending…"
+          ></textarea>
+          <div class="chat-form-footer">
+            <span>Answers use filtered transactions</span>
+            <button type="submit" aria-label="Send message">↑</button>
+          </div>
+        </form>
+
+        <p class="assistant-disclaimer">
+          Spending Assistant provides educational guidance, not financial advice.
+        </p>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <dialog id="uploadDialog">
+      <form method="dialog" class="dialog-card">
+        <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+        <div class="dialog-icon" aria-hidden="true">⇧</div>
+        <h2>Add a statement</h2>
+        <p>
+          In the product, users will drop a PDF or CSV here. This prototype does
+          not upload files.
+        </p>
+        <button class="button button-primary" value="cancel">Got it</button>
+      </form>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
